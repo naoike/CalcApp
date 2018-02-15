@@ -13,12 +13,10 @@ public class SecondActivity extends AppCompatActivity {
         setContentView(R.layout.activity_second);
 
         Intent intent = getIntent();
-        double value = intent.getIntExtra("VALUE", 0);
+        double value = intent.getDoubleExtra("VALUE", 0);
 
         TextView textView = (TextView) findViewById(R.id.textView);
         textView.setText(String.valueOf(value));
-
-
 
 
 

@@ -6,9 +6,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-
 
     EditText mEditText1;
     EditText mEditText2;
@@ -37,46 +38,48 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View v)
     {
+        String str1 = mEditText1.getText().toString();
+        String str2 = mEditText2.getText().toString();
+
+        if (str1.length()==0 ||str2.length()==0){
+            Toast.makeText(this, "数値を入力して下さい", Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        double i1 =  Double.parseDouble(str1);
+        double i2 =  Double.parseDouble(str2);
 
         if (v.getId() == R.id.button1){
-            String str1 = mEditText1.getText().toString();
-            String str2 = mEditText2.getText().toString();
-            double i1 =  Double.parseDouble(str1);
-            double i2 =  Double.parseDouble(str2);
 
             Intent intent = new Intent(this, SecondActivity.class);
             intent.putExtra("VALUE",i1+i2);
             startActivity(intent);
 
         } else  if (v.getId() == R.id.button2){
-            String str1 = mEditText1.getText().toString();
-            String str2 = mEditText2.getText().toString();
-            double i1 =  Double.parseDouble(str1);
-            double i2 =  Double.parseDouble(str2);
 
             Intent intent = new Intent(this, SecondActivity.class);
             intent.putExtra("VALUE",i1-i2);
             startActivity(intent);
 
         } else  if (v.getId() == R.id.button3){
-            String str1 = mEditText1.getText().toString();
-            String str2 = mEditText2.getText().toString();
-            double i1 =  Double.parseDouble(str1);
-            double i2 =  Double.parseDouble(str2);
 
             Intent intent = new Intent(this, SecondActivity.class);
             intent.putExtra("VALUE",i1*i2);
             startActivity(intent);
 
-        } else  if (v.getId() == R.id.button4){
-            String str1 = mEditText1.getText().toString();
-            String str2 = mEditText2.getText().toString();
-            double i1 =  Double.parseDouble(str1);
-            double i2 =  Double.parseDouble(str2);
+        } else  if (v.getId() == R.id.button4) {
 
-            Intent intent = new Intent(this, SecondActivity.class);
-            intent.putExtra("VALUE",i1/i2);
-            startActivity(intent);
-    }
+            if (i2 == 0) {
+                Toast.makeText(this, "0で割れません", Toast.LENGTH_LONG).show();
+
+            } else {
+
+                Intent intent = new Intent(this, SecondActivity.class);
+                intent.putExtra("VALUE", i1 / i2);
+                startActivity(intent);
+            }
+
+        }
+
     }
 }
